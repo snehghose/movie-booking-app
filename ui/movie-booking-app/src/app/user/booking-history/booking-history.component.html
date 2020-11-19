@@ -1,0 +1,15 @@
+<div class="my-4 text-center"><h3>Booking History</h3></div>
+<ul class="list-group" *ngIf="bookings">
+    <div *ngFor="let booking of bookings">
+    <a class="list-group-item list-group-item-action" [routerLink]="['/ticket', booking.id]" routerLinkActive="active">
+        <div class="row">
+            <div class="col-12 col-md-6 text-center">
+                Booking ID : {{booking.id}}
+            </div>
+            <div class="col-12 col-md-6 text-center">
+                Booking Date : {{booking.bookingDate | date}}
+            </div>
+        </div>
+    </a>
+</div>
+</ul>

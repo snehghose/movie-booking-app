@@ -1,0 +1,17 @@
+<div class="my-5" *ngIf="show">
+    <div class="alert alert-danger" *ngIf="isError">Could not book ticket</div>
+    <div><h3>{{movieName}}</h3></div>
+    <div><h5>{{theatreName}}</h5></div>
+    <form [formGroup]="addBooking" (ngSubmit)="onSubmitAddBooking()">
+        <div class="form-group">
+            <label for="noOfSeats">Enter number of tickets</label>
+            <input type="number" class="form-control" formControlName="noOfSeats" (input)="onChangeTotal()" name="noOfSeats" id="noOfSeats">
+            <small class="text-danger" *ngIf="addBooking.get('noOfSeats').touched && addBooking.get('noOfSeats').hasError('required')">Enter no. of tickets</small>
+            <small class="text-danger" *ngIf="addBooking.get('noOfSeats').touched && addBooking.get('noOfSeats').hasError('min')">No. of tickets should be atleast 1</small>
+            <small class="text-danger" *ngIf="addBooking.get('noOfSeats').touched && addBooking.get('noOfSeats').value>show.remainingSeats">Only {{show.remainingSeats}} tickets left</small>
+        </div>
+        <hr/>
+        <h3>Total Amount : ₹ {{total}}</h3>
+        <input type="submit" class="btn btn-dark col-12" value="Book">
+    </form>
+</div>

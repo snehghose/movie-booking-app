@@ -1,0 +1,42 @@
+<h2 class="text-center mt-5">Show Ticket</h2>
+<div class="card my-5" *ngIf="booking && show">
+    <div class="card-body">
+        <div class="row mx-3">
+            <div class="col-12 col-md-6">
+                <span><strong>Booking ID : {{booking.id}}</strong></span>
+            </div>
+            <div class="col-12 col-md-6">
+                <strong class="float-right">Booking Date : {{booking.bookingDate | date}}</strong>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-12 col-md-8">
+                <div class="my-3 ml-5">
+                    <h3><i class="material-icons">videocam</i>
+                        {{booking.movieName}}</h3>
+                </div>
+                <div class="my-4 ml-5">
+                    <h4><i class="material-icons">theaters</i>
+                        {{booking.theatreName}}</h4>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 text-center my-3">
+                <h2>{{booking.noOfSeats}}</h2>
+                <h5>Tickets</h5>
+                <h5>Seats : {{seats}}</h5>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-12 col-md-6 text-center">
+                <i class="material-icons">calendar_today</i>
+                Show Date : {{show.date | date}}
+            </div>
+            <div class="col-12 col-md-6 text-center">
+                <i class="material-icons">schedule</i>
+                Show Time : {{show.startTime}} hours
+            </div>
+        </div>
+    </div>
+</div>

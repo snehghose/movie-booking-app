@@ -1,0 +1,46 @@
+<div class="row my-3">
+    <div class="mx-3">
+        <h3>Shows</h3>
+    </div>
+    <span class="float-right ml-auto mr-3">
+        <a href="#" class="float-right" [routerLink]="['/show','add']"><i class="material-icons">playlist_add</i> Add Show</a>
+    </span>
+</div>
+<div id="accordion" *ngIf="displayShows">
+    <ul class="list-group">
+        <li *ngFor="let show of displayShows" class="list-group-item list-group-item-action">
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="row">
+                        <div class="col-12">
+                            <i class="material-icons">movie</i> {{show.movie}}
+                        </div>
+                        <div class="col-12">
+                            <i class="material-icons">theaters</i> {{show.theatre}}
+                        </div>
+                        <div class="col-12">
+                            <i class="material-icons">calendar_today</i> {{show.show.date | date}}
+                        </div>
+                        <div class="col-12">
+                            <i class="material-icons">schedule</i> {{show.time}}
+                        </div>
+                        <div class="col-12">
+                            <i class="material-icons">event_seat</i> Booked: {{show.sold}},
+                            Available : {{show.show.remainingSeats}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4 my-auto">
+                    <div class="row">
+                        <div class="col-12 col-lg-6">
+                            <button class="btn btn-link text-success" [routerLink]="['/show', show.show.id, 'edit']"><i class="material-icons">edit</i> Edit</button>
+                        </div>
+                        <div class="col-12 col-lg-6">
+                            <button class="btn btn-link text-danger" (click)="delete(show.show)"><i class="material-icons">delete_forever</i> Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

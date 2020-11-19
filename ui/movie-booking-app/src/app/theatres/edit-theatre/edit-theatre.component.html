@@ -1,0 +1,38 @@
+<div class="card my-5">
+    <div class="card-header">
+        <h4>Edit Theatre</h4>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-success" *ngIf="isSuccess">Theatre Updated</div>
+        <div class="alert alert-danger" *ngIf="isError">Could not update theatre</div>
+        <form [formGroup]="editTheatre" (ngSubmit) = "onSubmit()">
+            <div class="form-group">
+                <label for="name">Theatre Name</label>
+                <input type="text" class="form-control" id="name" formControlName="name" name="name">
+                <small class="text-danger" *ngIf="name.touched && name.hasError('required')">Theatre name is required</small>
+            </div>
+            <div class="form-group row">
+                <div class="col-12 col-md-6">
+                    <label for="city">City</label>
+                    <select class="form-control" formControlName="city" id="city">
+                        <option [value]="city" *ngFor="let city of cities">{{city}}</option>
+                    </select>
+                    <small class="text-danger" *ngIf="city.touched && city.hasError('required')">City is required</small>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label for="totalSeats">Total No. of Seats</label>
+                    <input type="number" class="form-control" min="0" max="10" id="totalSeats" formControlName="totalSeats" name="totalSeats">
+                    <small class="text-danger" *ngIf="totalSeats.touched && totalSeats.hasError('required')">Total Seats is required</small>
+                    <small class="text-danger" *ngIf="totalSeats.touched && totalSeats.value>300">Total Seats should be atmost 300</small>
+                    <small class="text-danger" *ngIf="totalSeats.touched && totalSeats.value<1">Total Seats should be greater than 0</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <textarea type="text" class="form-control" id="address" formControlName="address" name="address"></textarea>
+                <small class="text-danger" *ngIf="address.touched && address.hasError('required')">Address is required</small>
+            </div>
+            <input type="submit" class="btn btn-dark col-12" value="Edit Theatre" [disabled]="!editTheatre.valid">
+        </form>
+    </div>
+</div>

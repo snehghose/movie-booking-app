@@ -1,0 +1,33 @@
+<nav class="navbar navbar-dark bg-dark navbar-expand-sm">
+    <a (click)="home()" class="navbar-brand">Movie Booking</a>
+
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navcontent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navcontent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item" *ngIf="!loggedInUser">
+                <a [routerLink]="['/login']" routerLinkActive="active" class="nav-link">Login</a>
+            </li>
+            <li class="nav-item" *ngIf="!loggedInUser">
+                <a [routerLink]="['/signup']" routerLinkActive="active" class="nav-link">Sign Up</a>
+            </li>
+            <li class="nav-item dropdown" *ngIf="loggedInUser">
+                <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{loggedInUser.username}}
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" [routerLink]="['/personal-details']" routerLinkActive="active">Personal Details</a>
+                    <a class="dropdown-item" [routerLink]="['/change-password']" routerLinkActive="active">Change Password</a>
+                    <div class="dropdown-divider" *ngIf="loggedInUser.role === 'ROLE_CUSTOMER'"></div>
+                    <a class="dropdown-item" *ngIf="loggedInUser.role === 'ROLE_CUSTOMER'" [routerLink]="['/booking-history']">Booking History</a>
+                    
+                </div>
+            </li>
+            <li class="nav-item" *ngIf="loggedInUser">
+                <a (click)="logout()" routerLinkActive="active" class="nav-link">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>

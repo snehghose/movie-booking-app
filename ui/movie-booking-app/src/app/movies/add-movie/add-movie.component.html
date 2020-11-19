@@ -1,0 +1,93 @@
+<div class="card my-5">
+    <div class="card-header">
+        <h4>Add Movie</h4>
+    </div>
+    <div class="card-body">
+        <div class="alert alert-success" *ngIf="isSuccess">Movie Added</div>
+        <div class="alert alert-danger" *ngIf="isError">Could not add movie</div>
+        <form [formGroup]="addMovie" (ngSubmit) = "onSubmit()">
+            <div class="form-group row">
+                <div class="col-12 col-md-6">
+                    <label for="name">Movie Name</label>
+                    <input type="text" class="form-control" placeholder="Enter Movie Name" id="name" formControlName="name" name="name">
+                    <small class="text-danger" *ngIf="name.touched && name.hasError('required')">Movie name is required</small>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label for="language">Language</label>
+                    <div class="row">
+                        <div class="col-6 col-sm-4">
+                            <label for="language"><input type="radio" formControlName="language" name="language" id="language"
+                                [value]="languages[0]"> English</label>
+                        </div>
+                        <div class="col-6 col-sm-4">
+                            <label for="language"><input type="radio" formControlName="language" name="language" id="language"
+                                [value]="languages[1]"> Hindi</label>
+                        </div>
+                        <small class="text-danger" *ngIf="language.touched && language.hasError('required')">Language is required</small>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="genre">Genre</label>
+                <div class="row">
+                    <span class="ml-3 mr-4" *ngFor="let gen of genreList">
+                        <label>{{gen.value}}
+                        <input type="checkbox" class="checkboxSize" name="genre" formControlName="genre" value="gen" (change)="onCheckboxChange(gen, $event)"></label>
+                    </span>
+                </div>
+                <small class="text-danger" *ngIf="genre.touched && genres.length<1">Genre is required</small>
+            </div>
+            <div class="form-group row">
+                <div class="col-12 col-md-6">
+                    <label for="image">Image URL</label>
+                    <input type="text" placeholder="Enter Image URL" class="form-control" id="image" formControlName="image" name="image">
+                    <small class="text-danger" *ngIf="image.touched && image.hasError('required')">Image is required</small>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label for="rating">Rating</label>
+                    <div class="input-group">
+                        <input type="number" placeholder="Enter Rating out of 10" class="form-control" min="0" max="10" id="rating" formControlName="rating" name="rating">
+                        <div class="input-group-append">
+                            <div class="input-group-text">/ 10</div>
+                        </div>
+                    </div>
+                    <small class="text-danger" *ngIf="rating.touched && rating.hasError('required')">Rating is required</small>
+                    <small class="text-danger" *ngIf="rating.touched && rating.value>10">Rating should be less than 10</small>
+                    <small class="text-danger" *ngIf="rating.touched && rating.value<0">Rating should be greater than 0</small>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12 col-md-6">
+                    <label for="releaseDate">Release Date</label>
+                    <input type="date" placeholder="Enter Release Date" class="form-control" id="releaseDate" formControlName="releaseDate" name="releaseDate">
+                    <small class="text-danger" *ngIf="releaseDate.touched && releaseDate.hasError('required')">Release Date is required</small>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label for="duration">Movie Duration</label>
+                    <div class="input-group">
+                        <input class="form-control" placeholder="Enter Hours" type="number" max="2" min="0" name="hours" id="hours" formControlName="hours"/>
+                        <div class="input-group-append">
+                            <div class="input-group-text">hours</div>
+                        </div>
+                        <input class="form-control" placeholder="Enter Minutes" type="number" max="59" min="0" name="minutes" id="minutes" formControlName="minutes"/>
+                        <div class="input-group-append">
+                            <div class="input-group-text">minutes</div>
+                        </div>
+                    </div>
+                    <div><small class="text-danger" *ngIf="hours.touched && hours.hasError('required')">Hours is required</small></div>
+                    <div><small class="text-danger" *ngIf="hours.touched && hours.value>2">Hours should be atmost 2</small></div>
+                    <div><small class="text-danger" *ngIf="hours.touched && hours.value<0">Hours should be atleast 0</small></div>
+                    <div><small class="text-danger" *ngIf="minutes.touched && minutes.hasError('required')">Minutes is required</small></div>
+                    <div><small class="text-danger" *ngIf="minutes.touched && minutes.value>59">Minutes should be atmost 59</small></div>
+                    <div><small class="text-danger" *ngIf="minutes.touched && minutes.value<0">Minutes should be atleast 0</small></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="plot">Plot</label>
+                <textarea type="text" class="form-control" placeholder="Enter a brief plot description" id="plot" formControlName="plot" name="plot"></textarea>
+                <small class="text-danger" *ngIf="plot.touched && plot.hasError('required')">Plot is required</small>
+            </div>
+            <input type="submit" class="btn btn-dark col-12" value="Add Product" [disabled]="!addMovie.valid || genres.length<1">
+        </form>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="row justify-content-center">
+    <span class="btn btn-dark mx-3 my-3" (click)="onClickDate(day0)">{{day0 | date: 'EEE MMM dd'}}</span>
+    <span class="btn btn-dark mx-3 my-3" (click)="onClickDate(day1)">{{day1 | date: 'EEE MMM dd'}}</span>
+    <span class="btn btn-dark mx-3 my-3" (click)="onClickDate(day2)">{{day2 | date: 'EEE MMM dd'}}</span>
+    <span class="btn btn-dark mx-3 my-3" (click)="onClickDate(day3)">{{day3 | date: 'EEE MMM dd'}}</span>
+</div>
+<hr/>
+<div *ngFor="let show of shows">
+    <app-theatre-item [show]="show"></app-theatre-item>
+</div>

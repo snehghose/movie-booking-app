@@ -1,0 +1,49 @@
+<div class="card my-5">
+    <div class="card-header">
+        <h4>Edit Show</h4>
+    </div>
+    <div class="card-body" *ngIf="show && movie && theatre">
+        <div class="alert alert-success" *ngIf="isSuccess">Show Updated</div>
+        <div class="alert alert-danger" *ngIf="isError">Could not update show</div>
+        <form [formGroup]="editShow" (ngSubmit) = "onSubmit()">
+            <div class="form-group row">
+                <div class="col-12 col-md-6">
+                    <label for="movie">Movie</label>
+                    <select class="form-control" disabled>
+                        <option [selected]="true">{{movie.name}}</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label for="theatre">Theatre</label>
+                    <select class="form-control" disabled>
+                        <option [selected]="true" disabled>{{theatre.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-12 col-md-6">
+                    <label for="date">Show Date</label>
+                    <input type="date" placeholder="Enter Show Date" class="form-control" id="date" formControlName="date" name="date">
+                    <small class="text-danger" *ngIf="date.touched && date.hasError('required')">Show Date is required</small>
+                </div>
+                <div class="col-12 col-md-6">
+                    <label for="startTime">Show Start Time</label>
+                    <input type="time" placeholder="Enter Show Start Time" class="form-control" id="startTime" formControlName="startTime" name="startTime">
+                    <small class="text-danger" *ngIf="startTime.touched && startTime.hasError('required')">Show Start Time is required</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="ticketPrice">Ticket Price</label>
+                <div class="input-group">
+                    <div class="input-group-append">
+                        <div class="input-group-text">₹ </div>
+                    </div>
+                    <input class="form-control" placeholder="Enter Ticket Price" type="number" min="1" name="ticketPrice" id="ticketPrice" formControlName="ticketPrice"/>
+                </div>
+                <small class="text-danger" *ngIf="ticketPrice.touched && ticketPrice.hasError('required')">Ticket Price is required</small>
+                <small class="text-danger" *ngIf="ticketPrice.touched && ticketPrice.value<1">Ticket Price should be greater than 0</small>
+            </div>
+            <input type="submit" class="btn btn-dark col-12" value="Edit Show" [disabled]="!editShow.valid">
+        </form>
+    </div>
+</div>
